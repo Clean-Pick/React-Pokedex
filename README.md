@@ -1,8 +1,25 @@
-# React Pokédex
+# React - Pokédex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React based Pokédex using <a href="https://pokeapi.co/">PokéAPI</a>
 
-Currently, two official plugins are available:
+### Deployment link
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Link here once done
+
+## For devs
+
+### Import & install project in you IDE :
+* open IDE's terminal an paste
+  ```
+  git clone git@github.com:Clean-Pick/React-Pokedex.git
+  ```
+* then
+  ```
+  npm install
+  ```
+* and finally
+  ```
+  npm run dev
+  ```
+
+
