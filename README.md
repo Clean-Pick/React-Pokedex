@@ -8,8 +8,8 @@ Link here once done
 
 ## For devs
 
-### Import & install project in you IDE :
-* open IDE's terminal an paste
+### Import & install the project in your IDE :
+* open IDE's terminal and paste
   ```
   git clone git@github.com:Clean-Pick/React-Pokedex.git
   ```
