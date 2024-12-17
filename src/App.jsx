@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Index from './Index';
+import PokemonDetail from './pages/PokemonDetail';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Index />,
+    loader: () => {
+      // Utilisation de `defer` pour indiquer que le loader retourne une promesse
+      return fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000')
+        .then((res) => res.json());
+    }
+  },
+  {
+    path: "/:name",
+    element: <PokemonDetail/>,
+    loader: ({ params }) => {
+      return fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`)
+        .then((res) => res.json());
+    }
+  }
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  return <RouterProvider 
+    router={router} 
+    fallbackElement={<div>Chargement de l'application...</div>}
+  />;  
 }
 
-export default App
+export default App;
