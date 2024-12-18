@@ -16,13 +16,36 @@ const router = createBrowserRouter([
           const name = result.name;
           const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
           const pokemonData = await response.json();
-          
-          return {
-            id: pokemonData.id,
-            name: pokemonData.name,
-            type: pokemonData.types[0].type.name,
-            sprite: pokemonData.sprites.front_default,
-          };
+
+          if(pokemonData.types.length === 1){
+            return {
+              id : pokemonData.id,
+              name : pokemonData.name,
+              type1 : pokemonData.types[0].type.name,
+              type2 : undefined,
+              sprite: pokemonData.sprites.front_default,
+              healthPoint : pokemonData.stats[0].base_stat,
+              attack : pokemonData.stats[1].base_stat,
+              defense : pokemonData.stats[2].base_stat,
+              specialAttack : pokemonData.stats[3].base_stat,
+              specialDefense : pokemonData.stats[4].base_stat,
+              speed : pokemonData.stats[5].base_stat,
+            };
+          } else {
+            return {
+              id: pokemonData.id,
+              name: pokemonData.name,
+              type1: pokemonData.types[0].type.name,
+              type2: pokemonData.types[1].type.name,
+              sprite: pokemonData.sprites.front_default,
+              healthPoint : pokemonData.stats[0].base_stat,
+              attack : pokemonData.stats[1].base_stat,
+              defense : pokemonData.stats[2].base_stat,
+              specialAttack : pokemonData.stats[3].base_stat,
+              specialDefense : pokemonData.stats[4].base_stat,
+              speed : pokemonData.stats[5].base_stat,
+            };
+          }
         })
       );
 
