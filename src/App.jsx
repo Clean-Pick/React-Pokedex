@@ -7,10 +7,28 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Index />,
-    loader: () => {
-      // Utilisation de `defer` pour indiquer que le loader retourne une promesse
-      return fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000')
-        .then((res) => res.json());
+    loader: async () => {
+      const data = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000')
+        .then(response => response.json());
+
+      const detailData = await Promise.all(
+        data.results.map(async (result) => {
+          const name = result.name;
+          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+          const pokemonData = await response.json();
+          
+          return {
+            id: pokemonData.id,
+            name: pokemonData.name,
+            type: pokemonData.types[0].type.name,
+            sprite: pokemonData.sprites.front_default,
+          };
+        })
+      );
+
+      // Tri des résultats par ID
+      detailData.sort((a, b) => a.id - b.id);
+      return detailData;
     }
   },
   {
