@@ -1,0 +1,126 @@
+.card__container {
+    position: relative;
+
+    width: 196px;
+    height: 265px;
+
+    border-radius: 20px;
+
+    background-image: url("./temp/4.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.card__topSection__container {
+    position: absolute;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    width: 100%;
+    height: 55px;
+
+    border-radius: 20px 20px 0 0;
+}
+
+.card__topSection__container__name {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 1;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-size: 28px;
+
+    background-color: #0b3209;
+    color: white;
+
+    border-radius: 20px 20px 0 0;
+}
+
+.card__topSection__container__attSp {
+    grid-column: 1;
+    grid-row: 2;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    justify-self: start;
+
+    font-size: 10px;
+
+    height: 24px;
+    width: 60px;
+
+    border-radius: 0 0 20px 0;
+    background-color: #0b3209;
+}
+
+.card__topSection__container__types {
+    grid-column: 2;
+    grid-row: 2;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.card__topSection__container__defSp {
+    grid-column: 3;
+    grid-row: 2;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    justify-self: end;
+
+    font-size: 10px;
+
+    height: 24px;
+    width: 60px;
+
+    border-radius: 0 0 0 20px;
+    background-color: #0b3209;
+}
+
+.card__spriteContainer {
+    padding-top: 34px;
+    width: 100%;
+    height: 203px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.card__spriteContainer img {
+    width: 100%;
+    height: 203px;
+
+    object-fit: contain;
+
+    justify-self: center;
+    align-self: center;
+}
+
+.card__botSection__container {
+    position: absolute;
+    width: 100%;
+    height: 79px;
+
+    bottom: 0;
+
+    background-color: rgba(145, 98, 64, 0.4);
+
+    border-radius: 0 0 20px 20px;
+}
+
+
+
+
