@@ -8,7 +8,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Index />,
     loader: async () => {
-      const data = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000')
+      const data = await fetch('https://pokeapi.co/api/v2/pokemon?limit=2000')
         .then(response => response.json());
 
       const detailData = await Promise.all(
