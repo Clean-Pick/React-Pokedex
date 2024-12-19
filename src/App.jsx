@@ -74,31 +74,6 @@ function App() {
 
     return (
         <>
-            {/*Section et Div sont nécessaires pour encastrer les résultats dans une grille de 6 résultats par row,*/}
-            {/*modifiable dans App.css. Si vous trouve zune autre méthode , n'hésitez pas !*/}
-            <section className="listContainer">
-                <div className="itemsContainer">
-
-                    {/*Boucle/data à insérer ici.*/}
-                    
-                    {/*Exemple d'infos demandées par Card :*/}
-                    <Card
-                        name={"Jean-Pierre"}
-                        attSp={256}
-                        defSp={753}
-                        sprite={"./temp/1.png"}
-                        type1={"Water"}
-                        type2={"Fire"}
-                        att={578}
-                        speed={999}
-                        health={215}
-                        def={398}
-                        id={173}
-                    />
-
-                </div>
-            </section>
-
             <RouterProvider
                 router={router}
                 fallbackElement={<div>Chargement de l'application...</div>}
