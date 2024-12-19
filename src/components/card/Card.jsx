@@ -1,5 +1,5 @@
 import "./Card.css"
-import Sprite from "./temp/1.png"
+// import Sprite from "./temp/1.png"
 import Sword from "../../assets/icons/sword.png"
 import Sparkles from "../../assets/icons/sparkles.png"
 import MagicShield from "../../assets/icons/magic_shield.png"
@@ -7,7 +7,7 @@ import Wing from "../../assets/icons/wing.png"
 import Heart from "../../assets/icons/heart.png"
 import Shield from "../../assets/icons/shield.png"
 
-export default function Card({name, attSp, defSp, type1, type2, att, speed, health, def, id}) {
+export default function Card({name, attSp, defSp, sprite, type1, type2, att, speed, health, def, id}) {
 
     /* Ce qu'il reste à faire :
         -Adapter la background image de .card__container en fonction du type principal du pokémon (j'ai mis les backgrounds dans src/assets/types/bg)
@@ -47,7 +47,7 @@ export default function Card({name, attSp, defSp, type1, type2, att, speed, heal
                 </div>
 
                 <div className="card__spriteContainer">
-                    <img src={Sprite} alt=""/>
+                    <img src={sprite} alt="Sprite"/>
                 </div>
 
                 <div className="card__botSection__container">
