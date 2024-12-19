@@ -11,9 +11,11 @@ export default function Card({name, attSp, defSp, type1, type2, att, speed, heal
 
     /* Ce qu'il reste à faire :
         -Adapter la background image de .card__container en fonction du type principal du pokémon (j'ai mis les backgrounds dans src/assets/types/bg)
+        -Adapter les couleurs de .card__topSection__container et de .card__botSection__container selon le background (vert foncé avec le type bug/grass etc...)
         -Adapter l'icône des types (.card__topSection__container__types) en fonction du/des type/s du pokémon (les icones sont dans src/assets/types/icons, utiliser les SVG de préférence.)
         -Importer et Appliquer la police Nunito au projet.
         -Utiliser le module pour l'affichage du fetch à l'API
+        
     */
     return (
         <>
