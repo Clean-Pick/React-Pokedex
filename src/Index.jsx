@@ -4,14 +4,16 @@ import { useLoaderData, Link } from "react-router-dom";
 export default function Index() {
   const LSKEY = "allPokemon";
 
-  // const detailData = useLoaderData();
+  const loadedData = useLoaderData();
 
   const [detailData, setDetailData] = useState(() => {
     const saveDatailData = window.localStorage.getItem(LSKEY);
-    return saveDatailData ? JSON.parse(saveDatailData) : useLoaderData();
+    return saveDatailData ? JSON.parse(saveDatailData) : loadedData;
   });
 
   const [search, setSearch] = useState(""); // État pour la barre de recherche
+
+  const [visibleItems, setVisibleItems] = useState(18);
 
   useEffect(() => {
     window.localStorage.setItem(LSKEY, JSON.stringify(detailData));
@@ -53,6 +55,22 @@ export default function Index() {
     });
   };
 
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight - 100
+    ) {
+      setVisibleItems((prev) => prev + 18);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
       <h1>Home page</h1>
@@ -63,7 +81,7 @@ export default function Index() {
         onChange={handleSearch}
       />
       <div className="pokemon-container">
-          {filteredPokemon(detailData).map((pokemon) => (
+          {filteredPokemon(detailData).slice(0, visibleItems).map((pokemon) => (
             <div key={pokemon.name} className="card">
               <input 
                 type="checkbox" 
