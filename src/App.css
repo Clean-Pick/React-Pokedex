@@ -1,65 +1,14 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+.listContainer {
+    display: grid;
+
+    grid-template-columns: 1fr 12fr 1fr;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-}
+.itemsContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 
-ul[role="list"],
-ol[role="list"] {
-    list-style: none;
-}
+    grid-column: 2;
 
-html:focus-within {
-    scroll-behavior: smooth;
-}
-
-a:not([class]) {
-    text-decoration-skip-ink: auto;
-}
-
-img,
-picture,
-svg,
-video,
-canvas {
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    font-style: italic;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-input,
-button,
-textarea,
-select {
-    font: inherit;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-        transition: none;
-    }
-}
-
-body,
-html {
-    height: 100%;
-    scroll-behavior: smooth;
+    gap: 8px
 }

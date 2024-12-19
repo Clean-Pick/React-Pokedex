@@ -1,8 +1,10 @@
+import './reset.css'
 import './App.css';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Index from './Index';
 import PokemonDetail from './pages/PokemonDetail';
 import Card from "./components/card/Card.jsx";
+
 
 const router = createBrowserRouter([
     {
@@ -31,9 +33,11 @@ const router = createBrowserRouter([
                             specialAttack: pokemonData.stats[3].base_stat,
                             specialDefense: pokemonData.stats[4].base_stat,
                             speed: pokemonData.stats[5].base_stat,
+
                         };
                     } else {
                         return {
+
 
                             id: pokemonData.id,
                             name: pokemonData.name,
@@ -67,14 +71,34 @@ const router = createBrowserRouter([
     }
 ]);
 
+
 function App() {
 
     return (
         <>
+            {/*Section et Div sont nécessaires pour encastrer les résultats dans une grille de 6 résultats par row,*/}
+            {/*modifiable dans App.css. Si vous trouve zune autre méthode , n'hésitez pas !*/}
             <section className="listContainer">
-                <Card
-                    name={"Jean-Eudes"}
-                />
+                <div className="itemsContainer">
+
+                    {/*Boucle/data à insérer ici.*/}
+                    
+                    {/*Exemple d'infos demandées par Card :*/}
+                    <Card
+                        name={"Jean-Pierre"}
+                        attSp={256}
+                        defSp={753}
+                        sprite={"./temp/1.png"}
+                        type1={"Water"}
+                        type2={"Fire"}
+                        att={578}
+                        speed={999}
+                        health={215}
+                        def={398}
+                        id={173}
+                    />
+
+                </div>
             </section>
 
             <RouterProvider
