@@ -30,6 +30,7 @@ const router = createBrowserRouter([
               specialAttack : pokemonData.stats[3].base_stat,
               specialDefense : pokemonData.stats[4].base_stat,
               speed : pokemonData.stats[5].base_stat,
+              favorite : false
             };
           } else {
             return {
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
               specialAttack : pokemonData.stats[3].base_stat,
               specialDefense : pokemonData.stats[4].base_stat,
               speed : pokemonData.stats[5].base_stat,
+              favorite : false
             };
           }
         })
