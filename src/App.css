@@ -1,0 +1,14 @@
+.listContainer {
+    display: grid;
+
+    grid-template-columns: 1fr 12fr 1fr;
+}
+
+.itemsContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    grid-column: 2;
+
+    gap: 8px
+}
