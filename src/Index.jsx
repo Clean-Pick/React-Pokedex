@@ -3,68 +3,75 @@ import { useLoaderData, Link } from "react-router-dom";
 import Card from "./components/card/Card";
 
 export default function Index() {
-    const LSKEY = "allPokemon";
+  const LSKEY = "allPokemon";
 
-    const loadedData = useLoaderData();
+  const loadedData = useLoaderData();
 
-    const [detailData, setDetailData] = useState(() => {
-        const saveDatailData = window.localStorage.getItem(LSKEY);
-        return saveDatailData ? JSON.parse(saveDatailData) : loadedData;
-    });
+  const [detailData, setDetailData] = useState(() => {
+      const saveDatailData = window.localStorage.getItem(LSKEY);
+      return saveDatailData ? JSON.parse(saveDatailData) : loadedData;
+  });
 
-    const [search, setSearch] = useState(""); // État pour la barre de recherche
+  const [search, setSearch] = useState(""); // État pour la barre de recherche
 
-    const [visibleItems, setVisibleItems] = useState(18);
+  const [visibleItems, setVisibleItems] = useState(18);
 
-    useEffect(() => {
-        window.localStorage.setItem(LSKEY, JSON.stringify(detailData));
-    }, [detailData]);
+  useEffect(() => {
+      window.localStorage.setItem(LSKEY, JSON.stringify(detailData));
+  }, [detailData]);
 
-    const handleSearch = (event) => {
-        setSearch(event.target.value.toLowerCase()); // Met à jour la saisie
-    };
+  const handleSearch = (event) => {
+      setSearch(event.target.value.toLowerCase()); // Met à jour la saisie
+  };
 
-    const handleFavoriteChange = (id) => {
-        setDetailData((detailData) =>
-            detailData.map((pokemon) =>
-                pokemon.id === id ? {
-                        ...pokemon,
-                        favorite: pokemon.favorite ? false : true
-                    }
-                    : pokemon
-            )
-        )
-    }
+  const handleFavoriteChange = (id) => {
+      setDetailData((detailData) =>
+          detailData.map((pokemon) =>
+              pokemon.id === id ? {
+                      ...pokemon,
+                      favorite: pokemon.favorite ? false : true
+                  }
+                  : pokemon
+          )
+      )
+  }
 
-    const filteredPokemon = (data) => {
-        // Filtrer les Pokémon en fonction de la barre de recherche
-        let filtered = data;
+  const filteredPokemon = (data) => {
+      // Filtrer les Pokémon en fonction de la barre de recherche
+      let filtered = data;
 
-        if (search.trim()) {
-            filtered = data.filter((pokemon) =>
-                pokemon.name.toLowerCase().includes(search)
-            );
-        }
+      if (search.trim()) {
+          filtered = data.filter((pokemon) =>
+              pokemon.name.toLowerCase().includes(search)
+          );
+      }
 
-        // Trier les Pokémon : les favoris en premier
-        return filtered.sort((a, b) => {
-            if (a.favorite && !b.favorite) return -1; // `a` est favori, mais pas `b`
-            if (!a.favorite && b.favorite) return 1;  // `b` est favori, mais pas `a`
+      // Trier les Pokémon : les favoris en premier
+      return filtered.sort((a, b) => {
+          if (a.favorite && !b.favorite) return -1; // `a` est favori, mais pas `b`
+          if (!a.favorite && b.favorite) return 1;  // `b` est favori, mais pas `a`
 
-            // Si les deux ont le même statut, les trier par leur `id`
-            return a.id - b.id;
-        });
-    };
+          // Si les deux ont le même statut, les trier par leur `id`
+          return a.id - b.id;
+      });
+  };
 
-    const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop >=
-            document.documentElement.scrollHeight - 100
-        ) {
-            setVisibleItems((prev) => prev + 18);
-        }
+  const handleScroll = () => {
+      if (
+          window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.scrollHeight - 100
+      ) {
+          setVisibleItems((prev) => prev + 18);
+      }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
 
   return (
     <div>
