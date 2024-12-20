@@ -33,8 +33,8 @@ export default function Card({name, attSp, defSp, sprite, type1, type2, att, spe
 
                     </div>
                     <div className="card__topSection__container__types">
-                        <span>{type1}</span>
-                        <span>{type2}</span>
+                        <img src={type1} alt=""/>
+                        <img src={type2} alt=""/>
                     </div>
                     <div className="card__topSection__container__defSp">
 

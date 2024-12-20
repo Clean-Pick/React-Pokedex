@@ -86,8 +86,6 @@ export default function Index() {
       {/*modifiable dans App.css. Si vous trouve zune autre méthode , n'hésitez pas !*/}
       <section className="listContainer">
           <div className="itemsContainer">
-
-              {/*Boucle/data à insérer ici.*/}
               {filteredPokemon(detailData).slice(0, visibleItems).map((pokemon) => (
                 <div key={pokemon.name} className="card">
                   <input 
@@ -97,8 +95,6 @@ export default function Index() {
                     onChange={() => handleFavoriteChange(pokemon.id)}
                   />
                   <Link to={`/${pokemon.name}`} className="pokemon-link">
-                    {/* <img src={pokemon.sprite} alt={pokemon.name} />
-                    <p>{pokemon.name}</p> */}
                     <Card
                         name={pokemon.name}
                         attSp={pokemon.specialAttack}
