@@ -3,7 +3,6 @@ import './App.css';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Index from './Index';
 import PokemonDetail from './pages/PokemonDetail';
-import Card from "./components/card/Card.jsx";
 
 
 const router = createBrowserRouter([
