@@ -20,35 +20,47 @@ const router = createBrowserRouter([
             const pokemonData = await response.json();
 
             if(pokemonData.types.length === 1){
-            return {
-                id : pokemonData.id,
-                name : pokemonData.name,
-                type1 : pokemonData.types[0].type.name,
-                type2 : undefined,
-                sprite: pokemonData.sprites.front_default,
-                healthPoint : pokemonData.stats[0].base_stat,
-                attack : pokemonData.stats[1].base_stat,
-                defense : pokemonData.stats[2].base_stat,
-                specialAttack : pokemonData.stats[3].base_stat,
-                specialDefense : pokemonData.stats[4].base_stat,
-                speed : pokemonData.stats[5].base_stat,
-                favorite : false
-            };
+                const typeUrl = pokemonData.types[0].type.url;
+                const idType = typeUrl.match(/\/(\d+)\//);
+
+                return {
+                    id : pokemonData.id,
+                    name : pokemonData.name,
+                    type1 : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType[1]}.png`,
+                    type2 : undefined,
+                    sprite: pokemonData.sprites.front_default,
+                    healthPoint : pokemonData.stats[0].base_stat,
+                    attack : pokemonData.stats[1].base_stat,
+                    defense : pokemonData.stats[2].base_stat,
+                    specialAttack : pokemonData.stats[3].base_stat,
+                    specialDefense : pokemonData.stats[4].base_stat,
+                    speed : pokemonData.stats[5].base_stat,
+                    favorite : false
+                };
             } else {
-            return {
-                id: pokemonData.id,
-                name: pokemonData.name,
-                type1: pokemonData.types[0].type.name,
-                type2: pokemonData.types[1].type.name,
-                sprite: pokemonData.sprites.front_default,
-                healthPoint : pokemonData.stats[0].base_stat,
-                attack : pokemonData.stats[1].base_stat,
-                defense : pokemonData.stats[2].base_stat,
-                specialAttack : pokemonData.stats[3].base_stat,
-                specialDefense : pokemonData.stats[4].base_stat,
-                speed : pokemonData.stats[5].base_stat,
-                favorite : false
-            };
+                const typeUrl1 = pokemonData.types[0].type.url;
+                const splitTypeURL1 = typeUrl1.split("/");
+                const idType1 = splitTypeURL1[splitTypeURL1.length - 2];
+                console.log(idType1);
+                console.log(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType1}.png`)
+
+                const typeUrl2 = pokemonData.types[1].type.url;
+                const idType2 = typeUrl2.match(/\/(\d+)\//);
+
+                return {
+                    id: pokemonData.id,
+                    name: pokemonData.name,
+                    type1: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType1}.png`,
+                    type2: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType2[1]}.png`,
+                    sprite: pokemonData.sprites.front_default,
+                    healthPoint : pokemonData.stats[0].base_stat,
+                    attack : pokemonData.stats[1].base_stat,
+                    defense : pokemonData.stats[2].base_stat,
+                    specialAttack : pokemonData.stats[3].base_stat,
+                    specialDefense : pokemonData.stats[4].base_stat,
+                    speed : pokemonData.stats[5].base_stat,
+                    favorite : false
+                };
             }
         })
         );
