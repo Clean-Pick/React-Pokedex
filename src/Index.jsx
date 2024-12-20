@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {Link, useLoaderData} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLoaderData, Link } from "react-router-dom";
 import Card from "./components/card/Card";
 
 export default function Index() {
@@ -64,58 +64,52 @@ export default function Index() {
             setVisibleItems((prev) => prev + 18);
         }
     };
+  }, []);
 
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+  return (
+    <div>
+      <h1>Home page</h1>
+      <input
+        type="text"
+        placeholder="Rechercher un Pokémon..."
+        value={search}
+        onChange={handleSearch}
+      />
+      {/*Section et Div sont nécessaires pour encastrer les résultats dans une grille de 6 résultats par row,*/}
+      {/*modifiable dans App.css. Si vous trouve zune autre méthode , n'hésitez pas !*/}
+      <section className="listContainer">
+          <div className="itemsContainer">
 
-    return (
-        <div>
-            <h1>Home page</h1>
-            <input
-                type="text"
-                placeholder="Rechercher un Pokémon..."
-                value={search}
-                onChange={handleSearch}
-            />
-            {/*Section et Div sont nécessaires pour encastrer les résultats dans une grille de 6 résultats par row,*/}
-            {/*modifiable dans App.css. Si vous trouve zune autre méthode , n'hésitez pas !*/}
-            <section className="listContainer">
-                <div className="itemsContainer">
-
-                    {/*Boucle/data à insérer ici.*/}
-                    {filteredPokemon(detailData).slice(0, visibleItems).map((pokemon) => (
-                        <div key={pokemon.name} className="card">
-                            <input
-                                type="checkbox"
-                                id={pokemon.id}
-                                checked={pokemon.favorite}
-                                onChange={() => handleFavoriteChange(pokemon.id)}
-                            />
-                            <Link to={`/${pokemon.name}`} className="pokemon-link">
-                                {/* <img src={pokemon.sprite} alt={pokemon.name} />
+              {/*Boucle/data à insérer ici.*/}
+              {filteredPokemon(detailData).slice(0, visibleItems).map((pokemon) => (
+                <div key={pokemon.name} className="card">
+                  <input 
+                    type="checkbox" 
+                    id={pokemon.id}
+                    checked={pokemon.favorite}
+                    onChange={() => handleFavoriteChange(pokemon.id)}
+                  />
+                  <Link to={`/${pokemon.name}`} className="pokemon-link">
+                    {/* <img src={pokemon.sprite} alt={pokemon.name} />
                     <p>{pokemon.name}</p> */}
-                                <Card
-                                    name={pokemon.name}
-                                    attSp={pokemon.specialAttack}
-                                    defSp={pokemon.specialDefense}
-                                    sprite={pokemon.sprite}
-                                    type1={pokemon.type1}
-                                    type2={pokemon.type2}
-                                    att={pokemon.attack}
-                                    speed={pokemon.speed}
-                                    health={pokemon.healthPoint}
-                                    def={pokemon.defense}
-                                    id={pokemon.id}
-                                />
-                            </Link>
-                        </div>
-                    ))}
+                    <Card
+                        name={pokemon.name}
+                        attSp={pokemon.specialAttack}
+                        defSp={pokemon.specialDefense}
+                        sprite={pokemon.sprite}
+                        type1={pokemon.type1}
+                        type2={pokemon.type2}
+                        att={pokemon.attack}
+                        speed={pokemon.speed}
+                        health={pokemon.healthPoint}
+                        def={pokemon.defense}
+                        id={pokemon.id}
+                    />
+                  </Link>
                 </div>
-            </section>
-        </div>
-    );
+              ))}
+          </div>
+      </section>
+    </div>
+  );
 }
