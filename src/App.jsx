@@ -26,6 +26,8 @@ const router = createBrowserRouter([
                 return {
                     id : pokemonData.id,
                     name : pokemonData.name,
+                    type1Id : idType[1],
+                    type2Id : idType[1],
                     type1 : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType[1]}.png`,
                     type2 : undefined,
                     sprite: pokemonData.sprites.front_default,
@@ -39,10 +41,7 @@ const router = createBrowserRouter([
                 };
             } else {
                 const typeUrl1 = pokemonData.types[0].type.url;
-                const splitTypeURL1 = typeUrl1.split("/");
-                const idType1 = splitTypeURL1[splitTypeURL1.length - 2];
-                console.log(idType1);
-                console.log(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType1}.png`)
+                const idType1 = typeUrl1.match(/\/(\d+)\//);
 
                 const typeUrl2 = pokemonData.types[1].type.url;
                 const idType2 = typeUrl2.match(/\/(\d+)\//);
@@ -50,7 +49,9 @@ const router = createBrowserRouter([
                 return {
                     id: pokemonData.id,
                     name: pokemonData.name,
-                    type1: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType1}.png`,
+                    type1Id : idType1[1],
+                    type2Id : idType2[1],
+                    type1: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType1[1]}.png`,
                     type2: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType2[1]}.png`,
                     sprite: pokemonData.sprites.front_default,
                     healthPoint : pokemonData.stats[0].base_stat,

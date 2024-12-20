@@ -71,8 +71,53 @@ export default function Index() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
 
+  const typeColors = {
+    1: "#A8A77A",
+    2: "#C22E28",
+    3: "#A98FF3",
+    4: "#A33EA1",
+    5: "#E2BF65",
+    6: "#B6A136",
+    7: "#A6B91A",
+    8: "#735797",
+    9: "#B7B7CE",
+    10: "#EE8130",
+    11: "#6390F0",
+    12: "#7AC74C",
+    13: "#F7D02C",
+    14: "#F95587",
+    15: "#96D9D6",
+    16: "#6F35FC",
+    17: "#705746",
+    18: "#D685AD",
+    19: "#FFD700", // Ajout fictif pour "stellar"
+    20: "#68A090"  // Unknown (10001)
+  };
+  
+  const typeColorsDark = {
+    1: "#8A8A62",
+    2: "#9E241E",
+    3: "#8572C3",
+    4: "#812E80",
+    5: "#B99A52",
+    6: "#938224",
+    7: "#889015",
+    8: "#5A466E",
+    9: "#9292A5",
+    10: "#C56729",
+    11: "#4E72C0",
+    12: "#629C3B",
+    13: "#C5A623",
+    14: "#C03F6A",
+    15: "#78ADA9",
+    16: "#562CBB",
+    17: "#584435",
+    18: "#AC6B87",
+    19: "#CCAC00",  // Sombre pour "stellar"
+    20: "#517273"  // Unknown (10001)
+  };
+  
   return (
     <div>
       <h1>Home page</h1>
@@ -107,6 +152,10 @@ export default function Index() {
                         health={pokemon.healthPoint}
                         def={pokemon.defense}
                         id={pokemon.id}
+                        color_type1={typeColors[pokemon.type1Id]}
+                        color_type2={typeColors[pokemon.type2Id]}
+                        top_color={typeColorsDark[pokemon.type1Id]}
+                        bot_color={typeColorsDark[pokemon.type2Id]}
                     />
                   </Link>
                 </div>
