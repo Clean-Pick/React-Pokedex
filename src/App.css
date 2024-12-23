@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+body {
+    font-family: "Nunito", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
+    scroll-behavior: smooth;
+}
+
 .listContainer {
     display: grid;
 
@@ -10,5 +22,7 @@
 
     grid-column: 2;
 
-    gap: 8px
+    gap: 8px;
+
+    margin-bottom: 64px;
 }

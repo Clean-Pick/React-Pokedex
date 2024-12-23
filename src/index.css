@@ -1,0 +1,100 @@
+.header__container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 99vw;
+
+    background-image: url("./assets/main_background.jpg");
+    background-size: cover;
+    background-position-y: 100%;
+
+    margin-bottom: 32px;
+}
+
+.searchBar__container {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 604px;
+    height: 234px;
+
+    background-color: rgba(144, 78, 72, 0.2);
+
+    border-radius: 20px;
+}
+
+.searchBar__container h1 {
+    font-size: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    width: 100%;
+
+    margin-top: 32px;
+    margin-bottom: 8px;
+
+    text-transform: uppercase;
+
+    color: white;
+}
+
+.searchBar__container input {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+
+    width: 80%;
+    height: 55px;
+
+    padding-left: 40px;
+
+    color: white;
+
+    font-size: 40px;
+    line-height: 40px;
+
+    text-transform: capitalize;
+}
+
+.searchBar__container input::placeholder {
+    color: white;
+
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.searchBar__container input:focus {
+    outline-width: 0;
+}
+
+.icons__container {
+    width: 20%;
+    padding-right: 40px;
+}
+
+.bar__container {
+    display: flex;
+
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+
+    padding-left: 40px;
+    padding-right: 40px;
+
+    margin-bottom: 16px;
+}
+
+.bar__container hr {
+    position: relative;
+
+    top: -25px;
+
+    height: 1px;
+    width: 100%;
+
+    border: none;
+    background-color: white;
+}
