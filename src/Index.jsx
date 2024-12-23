@@ -8,8 +8,8 @@ export default function Index() {
   const loadedData = useLoaderData();
 
   const [detailData, setDetailData] = useState(() => {
-      const saveDatailData = window.localStorage.getItem(LSKEY);
-      return saveDatailData ? JSON.parse(saveDatailData) : loadedData;
+    const saveDatailData = window.localStorage.getItem(LSKEY);
+    return saveDatailData ? JSON.parse(saveDatailData) : loadedData;
   });
 
   const [search, setSearch] = useState(""); // État pour la barre de recherche
@@ -17,52 +17,48 @@ export default function Index() {
   const [visibleItems, setVisibleItems] = useState(18);
 
   useEffect(() => {
-      window.localStorage.setItem(LSKEY, JSON.stringify(detailData));
+    window.localStorage.setItem(LSKEY, JSON.stringify(detailData));
   }, [detailData]);
 
   const handleSearch = (event) => {
-      setSearch(event.target.value.toLowerCase()); // Met à jour la saisie
+    setSearch(event.target.value.toLowerCase()); // Met à jour la saisie
   };
 
   const handleFavoriteChange = (id) => {
-      setDetailData((detailData) =>
-          detailData.map((pokemon) =>
-              pokemon.id === id ? {
-                      ...pokemon,
-                      favorite: pokemon.favorite ? false : true
-                  }
-                  : pokemon
-          )
+    setDetailData((detailData) =>
+      detailData.map((pokemon) =>
+        pokemon.id === id
+          ? {
+              ...pokemon,
+              favorite: pokemon.favorite ? false : true,
+            }
+          : pokemon
       )
-  }
+    );
+  };
 
   const filteredPokemon = (data) => {
-      // Filtrer les Pokémon en fonction de la barre de recherche
-      let filtered = data;
+    // Filtrer les Pokémon en fonction de la barre de recherche
+    let filtered = data;
 
-      if (search.trim()) {
-          filtered = data.filter((pokemon) =>
-              pokemon.name.toLowerCase().includes(search)
-          );
-      }
+    if (search.trim()) {
+      filtered = data.filter((pokemon) => pokemon.name.toLowerCase().includes(search));
+    }
 
-      // Trier les Pokémon : les favoris en premier
-      return filtered.sort((a, b) => {
-          if (a.favorite && !b.favorite) return -1; // `a` est favori, mais pas `b`
-          if (!a.favorite && b.favorite) return 1;  // `b` est favori, mais pas `a`
+    // Trier les Pokémon : les favoris en premier
+    return filtered.sort((a, b) => {
+      if (a.favorite && !b.favorite) return -1; // `a` est favori, mais pas `b`
+      if (!a.favorite && b.favorite) return 1; // `b` est favori, mais pas `a`
 
-          // Si les deux ont le même statut, les trier par leur `id`
-          return a.id - b.id;
-      });
+      // Si les deux ont le même statut, les trier par leur `id`
+      return a.id - b.id;
+    });
   };
 
   const handleScroll = () => {
-      if (
-          window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.scrollHeight - 100
-      ) {
-          setVisibleItems((prev) => prev + 18);
-      }
+    if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 100) {
+      setVisibleItems((prev) => prev + 18);
+    }
   };
 
   useEffect(() => {
@@ -92,9 +88,9 @@ export default function Index() {
     17: "#705746",
     18: "#D685AD",
     19: "#FFD700", // Ajout fictif pour "stellar"
-    20: "#68A090"  // Unknown (10001)
+    20: "#68A090", // Unknown (10001)
   };
-  
+
   const typeColorsDark = {
     1: "#8A8A62",
     2: "#9E241E",
@@ -114,53 +110,48 @@ export default function Index() {
     16: "#562CBB",
     17: "#584435",
     18: "#AC6B87",
-    19: "#CCAC00",  // Sombre pour "stellar"
-    20: "#517273"  // Unknown (10001)
+    19: "#CCAC00", // Sombre pour "stellar"
+    20: "#517273", // Unknown (10001)
   };
-  
+
   return (
     <div>
       <h1>Home page</h1>
-      <input
-        type="text"
-        placeholder="Rechercher un Pokémon..."
-        value={search}
-        onChange={handleSearch}
-      />
+      <input type="text" placeholder="Rechercher un Pokémon..." value={search} onChange={handleSearch} />
       {/*Section et Div sont nécessaires pour encastrer les résultats dans une grille de 6 résultats par row,*/}
       {/*modifiable dans App.css. Si vous trouve zune autre méthode , n'hésitez pas !*/}
       <section className="listContainer">
-          <div className="itemsContainer">
-              {filteredPokemon(detailData).slice(0, visibleItems).map((pokemon) => (
-                <div key={pokemon.name} className="card">
-                  <input 
-                    type="checkbox" 
+        <div className="itemsContainer">
+          {filteredPokemon(detailData)
+            .slice(0, visibleItems)
+            .map((pokemon) => (
+              <div key={pokemon.name} className="card">
+                <label>
+                  <input type="checkbox" id={pokemon.id} checked={pokemon.favorite} onChange={() => handleFavoriteChange(pokemon.id)} />
+                  <span class="star">★</span>
+                </label>
+                <Link to={`/${pokemon.name}`} className="pokemon-link">
+                  <Card
+                    name={pokemon.name}
+                    attSp={pokemon.specialAttack}
+                    defSp={pokemon.specialDefense}
+                    sprite={pokemon.sprite}
+                    type1={pokemon.type1}
+                    type2={pokemon.type2}
+                    att={pokemon.attack}
+                    speed={pokemon.speed}
+                    health={pokemon.healthPoint}
+                    def={pokemon.defense}
                     id={pokemon.id}
-                    checked={pokemon.favorite}
-                    onChange={() => handleFavoriteChange(pokemon.id)}
+                    color_type1={typeColors[pokemon.type1Id]}
+                    color_type2={typeColors[pokemon.type2Id]}
+                    top_color={typeColorsDark[pokemon.type1Id]}
+                    bot_color={typeColorsDark[pokemon.type2Id]}
                   />
-                  <Link to={`/${pokemon.name}`} className="pokemon-link">
-                    <Card
-                        name={pokemon.name}
-                        attSp={pokemon.specialAttack}
-                        defSp={pokemon.specialDefense}
-                        sprite={pokemon.sprite}
-                        type1={pokemon.type1}
-                        type2={pokemon.type2}
-                        att={pokemon.attack}
-                        speed={pokemon.speed}
-                        health={pokemon.healthPoint}
-                        def={pokemon.defense}
-                        id={pokemon.id}
-                        color_type1={typeColors[pokemon.type1Id]}
-                        color_type2={typeColors[pokemon.type2Id]}
-                        top_color={typeColorsDark[pokemon.type1Id]}
-                        bot_color={typeColorsDark[pokemon.type2Id]}
-                    />
-                  </Link>
-                </div>
-              ))}
-          </div>
+                </Link>
+              </div>
+            ))}
+        </div>
       </section>
     </div>
   );
