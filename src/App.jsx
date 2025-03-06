@@ -1,35 +1,97 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './reset.css'
+import './App.css';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import Index from './Index';
+import PokemonDetail from './pages/PokemonDetail';
+
+
+const router = createBrowserRouter([
+    {
+    path: "/",
+    element: <Index />,
+    loader: async () => {
+        const data = await fetch('https://pokeapi.co/api/v2/pokemon?limit=2000')
+        .then(response => response.json());
+
+        const detailData = await Promise.all(
+        data.results.map(async (result) => {
+            const name = result.name;
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+            const pokemonData = await response.json();
+
+            if(pokemonData.types.length === 1){
+                const typeUrl = pokemonData.types[0].type.url;
+                const idType = typeUrl.match(/\/(\d+)\//);
+
+                return {
+                    id : pokemonData.id,
+                    name : pokemonData.name,
+                    type1Id : idType[1],
+                    type2Id : idType[1],
+                    type1 : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType[1]}.png`,
+                    type2 : undefined,
+                    sprite: pokemonData.sprites.front_default,
+                    healthPoint : pokemonData.stats[0].base_stat,
+                    attack : pokemonData.stats[1].base_stat,
+                    defense : pokemonData.stats[2].base_stat,
+                    specialAttack : pokemonData.stats[3].base_stat,
+                    specialDefense : pokemonData.stats[4].base_stat,
+                    speed : pokemonData.stats[5].base_stat,
+                    favorite : false
+                };
+            } else {
+                const typeUrl1 = pokemonData.types[0].type.url;
+                const idType1 = typeUrl1.match(/\/(\d+)\//);
+
+                const typeUrl2 = pokemonData.types[1].type.url;
+                const idType2 = typeUrl2.match(/\/(\d+)\//);
+
+                return {
+                    id: pokemonData.id,
+                    name: pokemonData.name,
+                    type1Id : idType1[1],
+                    type2Id : idType2[1],
+                    type1: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType1[1]}.png`,
+                    type2: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${idType2[1]}.png`,
+                    sprite: pokemonData.sprites.front_default,
+                    healthPoint : pokemonData.stats[0].base_stat,
+                    attack : pokemonData.stats[1].base_stat,
+                    defense : pokemonData.stats[2].base_stat,
+                    specialAttack : pokemonData.stats[3].base_stat,
+                    specialDefense : pokemonData.stats[4].base_stat,
+                    speed : pokemonData.stats[5].base_stat,
+                    favorite : false
+                };
+            }
+        })
+        );
+
+        // Tri des résultats par ID
+        detailData.sort((a, b) => a.id - b.id);
+        return detailData;
+    }
+    },
+    {
+        path: "/:name",
+        element: <PokemonDetail/>,
+        loader: ({params}) => {
+            return fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`)
+                .then((res) => res.json());
+        }
+    }
+]);
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <RouterProvider
+                router={router}
+                fallbackElement={<div>Chargement de l'application...</div>}
+            />
+        </>
+    );
 }
 
-export default App
+export default App;

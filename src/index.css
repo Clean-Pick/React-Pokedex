@@ -1,68 +1,100 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+.header__container {
+    display: flex;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    justify-content: center;
+    align-items: center;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    height: 100vh;
+    width: 99vw;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    background-image: url("./assets/main_background.jpg");
+    background-size: cover;
+    background-position-y: 100%;
+
+    margin-bottom: 32px;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.searchBar__container {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 604px;
+    height: 234px;
+
+    background-color: rgba(144, 78, 72, 0.2);
+
+    border-radius: 20px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.searchBar__container h1 {
+    font-size: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    width: 100%;
+
+    margin-top: 32px;
+    margin-bottom: 8px;
+
+    text-transform: uppercase;
+
+    color: white;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.searchBar__container input {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+
+    width: 80%;
+    height: 55px;
+
+    padding-left: 40px;
+
+    color: white;
+
+    font-size: 40px;
+    line-height: 40px;
+
+    text-transform: capitalize;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.searchBar__container input::placeholder {
+    color: white;
+
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.searchBar__container input:focus {
+    outline-width: 0;
+}
+
+.icons__container {
+    width: 20%;
+    padding-right: 40px;
+}
+
+.bar__container {
+    display: flex;
+
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+
+    padding-left: 40px;
+    padding-right: 40px;
+
+    margin-bottom: 16px;
+}
+
+.bar__container hr {
+    position: relative;
+
+    top: -25px;
+
+    height: 1px;
+    width: 100%;
+
+    border: none;
+    background-color: white;
 }
